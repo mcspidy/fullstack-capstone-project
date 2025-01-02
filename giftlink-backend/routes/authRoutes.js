@@ -18,14 +18,14 @@ const logger = pino();  // Create a Pino logger instance
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
-//Step 2
+    //Step 2
     try {
         // Task 1: Connect to `giftsdb` in MongoDB through `connectToDatabase` in `db.js`
         const db = await connectToDatabase();
 
         // Task 2: Access MongoDB collection
         const collection = db.collection("users");
-        
+
         //Task 3: Check for existing email
         const existingEmail = await collection.findOne({ email: req.body.email });
 
@@ -56,11 +56,11 @@ router.post('/register', async (req, res) => {
 
         //Create JWT
         const authtoken = jwt.sign(payload, JWT_SECRET);
-        
+
         logger.info('User registered successfully');
-        res.json({authtoken,email});
+        res.json({ authtoken, email });
     } catch (e) {
-         return res.status(500).send('Internal server error');
+        return res.status(500).send('Internal server error');
     }
 });
 
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
         // Task 4: Check if the password matches the encrypted password and send appropriate message on mismatch
         if (theUser) {
             let result = await bcryptjs.compare(req.body.password, theUser.password)
-            if(!result) {
+            if (!result) {
                 logger.error('Passwords do not match');
                 return res.status(404).json({ error: 'Wrong pasword' });
             }
