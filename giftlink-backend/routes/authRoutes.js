@@ -170,6 +170,7 @@ router.put('/update', async (req, res) => {
 
         res.json({ authtoken });
     } catch (e) {
+        logger.error(e);
         return res.status(500).send('Internal server error');
 
     }

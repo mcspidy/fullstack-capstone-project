@@ -3,7 +3,8 @@ const router = express.Router();
 const connectToDatabase = require('../models/db');
 const logger = require('../logger');
 
-router.get('/', async (req, res) => {
+// Get all gifts
+router.get('/', async (req, res, next) => {
     try {
         // Task 1: Connect to MongoDB and store connection to db constant
         const db = await connectToDatabase();
@@ -18,11 +19,13 @@ router.get('/', async (req, res) => {
         res.json(gifts);
     } catch (e) {
         console.error('Error fetching gifts:', e);
-        res.status(500).send('Error fetching gifts');
+        next(e);
+        //res.status(500).send('Error fetching gifts');
     }
 });
 
-router.get('/:id', async (req, res) => {
+// Get a single gift by ID
+router.get('/:id', async (req, res, next) => {
     try {
         // Task 1: Connect to MongoDB and store connection to db constant
         const db = await connectToDatabase();
@@ -41,8 +44,10 @@ router.get('/:id', async (req, res) => {
 
         res.json(gift);
     } catch (e) {
-        console.error('Error fetching gift:', e);
-        res.status(500).send('Error fetching gift');
+        logger.console.error('Error fetching gift:', e);
+        next(e);
+        // console.error('Error fetching gift:', e);
+        // res.status(500).send('Error fetching gift');
     }
 });
 
@@ -57,6 +62,7 @@ router.post('/', async (req, res, next) => {
 
         res.status(201).json(gift.ops[0]);
     } catch (e) {
+        logger.console.error('Error creating gift:', e);
         next(e);
     }
 });

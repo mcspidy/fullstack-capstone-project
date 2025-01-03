@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {urlConfig} from '../../config';
+import { urlConfig } from '../../config';
 
 function MainPage() {
     const [gifts, setGifts] = useState([]);
@@ -33,14 +33,14 @@ function MainPage() {
         // Write your code below this line
         navigate(`/app/product/${productId}`);
 
-      };
+    };
 
     // Task 3: Format timestamp
     const formatDate = (timestamp) => {
         // Write your code below this line
         const date = new Date(timestamp * 1000);
         return date.toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' });
-      };
+    };
 
     const getConditionClass = (condition) => {
         return condition === "New" ? "list-group-item-success" : "list-group-item-warning";
@@ -56,11 +56,11 @@ function MainPage() {
                             {/* // Task 4: Display gift image or placeholder */}
                             {/* // Write your code below this line */}
                             <div className="image-placeholder">
-                               {gift.image ? (
-                                   <img src={gift.image} alt={gift.name} className="card-img-top" />
-                               ) : (
-                                   <div className="no-image-available">No Image Available</div>
-                               )}
+                                {gift.image ? (
+                                    <img src={gift.image} alt={gift.name} className="card-img-top" />
+                                ) : (
+                                    <div className="no-image-available">No Image Available</div>
+                                )}
                             </div>
                             <div className="card-body">
 
@@ -69,7 +69,7 @@ function MainPage() {
                                 <h5 className="card-title">{gift.name}</h5>
 
                                 <p className={`card-text ${getConditionClass(gift.condition)}`}>
-                                {gift.condition}
+                                    {gift.condition}
                                 </p>
 
                                 {/* // Task 6: Display gift image or placeholder */}

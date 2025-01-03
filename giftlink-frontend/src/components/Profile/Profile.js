@@ -76,7 +76,7 @@ const Profile = () => {
 
         //Step 1: Task 3: set body to send user details
         body: JSON.stringify(payload),
-        
+
       });
 
       if (response.ok) {

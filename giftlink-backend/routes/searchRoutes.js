@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
+const logger = require('../logger');
 
 // Search for gifts
 router.get('/', async (req, res, next) => {
@@ -14,7 +15,8 @@ router.get('/', async (req, res, next) => {
         let query = {};
 
         // Add the name filter to the query if the name parameter is not empty
-        if (req.query.name>req.query.name && req.query.name.trim() !== '') {
+        // if (req.query.name>req.query.name && req.query.name.trim() !== '') {
+        if (req.query.name && req.query.name.trim() !== '') {
             query.name = { $regex: req.query.name, $options: "i" }; // Using regex for partial match, case-insensitive
         }
 
@@ -34,6 +36,7 @@ router.get('/', async (req, res, next) => {
 
         res.json(gifts);
     } catch (e) {
+        logger.error('Error searching for gifts:', e);
         next(e);
     }
 });

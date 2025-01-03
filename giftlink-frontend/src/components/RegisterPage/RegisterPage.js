@@ -40,10 +40,12 @@ function RegisterPage() {
                 password: password
             })
         });
+        
         //Step 2 - Task 1: Access data coming from fetch API
         const json = await response.json();
         console.log('json data', json);
         console.log('er', json.error);
+
         //Step 2 - Task 2: Set user details
         if (json.authtoken) {
             sessionStorage.setItem('auth-token', json.authtoken);

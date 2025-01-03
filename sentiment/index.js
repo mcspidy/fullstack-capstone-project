@@ -21,7 +21,7 @@ app.post('/sentiment', async (req, res) => {
     const { sentence } = req.query;
 
 
-    if (!sentence) {
+    if (!sentence || sentence === '') {
         logger.error('No sentence provided');
         return res.status(400).json({ error: 'No sentence provided' });
     }

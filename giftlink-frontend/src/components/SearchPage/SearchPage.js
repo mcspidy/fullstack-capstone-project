@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {urlConfig} from '../../config';
+import { urlConfig } from '../../config';
 
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -101,7 +101,7 @@ function SearchPage() {
                                 max="10"
                                 value={ageRange}
                                 onChange={e => setAgeRange(e.target.value)}
-                            />                            
+                            />
                         </div>
                     </div>
                     {/* Task 7: Add text input field for search criteria*/}

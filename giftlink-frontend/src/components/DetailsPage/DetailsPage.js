@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './DetailsPage.css';
+import { urlConfig } from '../../config';
 
 function DetailsPage() {
     const navigate = useNavigate();
@@ -9,17 +10,17 @@ function DetailsPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-	useEffect(() => {
+    useEffect(() => {
         const authenticationToken = sessionStorage.getItem('auth-token');
         if (!authenticationToken) {
-			// Task 1: Check for authentication and redirect
+            // Task 1: Check for authentication and redirect
             navigate('/app/login');
         }
 
         // get the gift to be rendered on the details page
         const fetchGift = async () => {
             try {
-				// Task 2: Fetch gift details
+                // Task 2: Fetch gift details
                 const url = `${urlConfig.backendUrl}/api/gifts/${productId}`;
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -36,18 +37,18 @@ function DetailsPage() {
 
         fetchGift();
 
-		// Task 3: Scroll to top on component mount
-		window.scrollTo(0, 0);
+        // Task 3: Scroll to top on component mount
+        window.scrollTo(0, 0);
 
-    }, [productId]);
+    }, [productId, navigate]);
 
 
     const handleBackClick = () => {
-		// Task 4: Handle back click
-		navigate(-1);
-	};
+        // Task 4: Handle back click
+        navigate(-1);
+    };
 
-	//The comments have been hardcoded for this project.
+    //The comments have been hardcoded for this project.
     const comments = [
         {
             author: "John Doe",
@@ -86,31 +87,31 @@ function DetailsPage() {
                 <div className="card-body">
                     <div className="image-placeholder-large">
                         {gift.image ? (
-			                // Task 5: Display gift image
-			                <img src={gift.image} alt={gift.name} className="product-image-large" />
+                            // Task 5: Display gift image
+                            <img src={gift.image} alt={gift.name} className="product-image-large" />
                         ) : (
                             <div className="no-image-available-large">No Image Available</div>
                         )}
                     </div>
                     // Task 6: Display gift details
-                    <p><strong>Category:</strong> 
+                    <p><strong>Category:</strong>
                         {/* insert code here  */}
                         {gift.category}
-			        </p>
-                    <p><strong>Condition:</strong> 
-				        {/* insert code here  */}
+                    </p>
+                    <p><strong>Condition:</strong>
+                        {/* insert code here  */}
                         {gift.condition}
                     </p>
-                    <p><strong>Date Added:</strong> 
-				        {/* insert code here  */}
+                    <p><strong>Date Added:</strong>
+                        {/* insert code here  */}
                         {gift.dateAdded}
                     </p>
-                    <p><strong>Age (Years):</strong> 
-				        {/* insert code here  */}
+                    <p><strong>Age (Years):</strong>
+                        {/* insert code here  */}
                         {gift.age}
                     </p>
-                    <p><strong>Description:</strong> 
-				        {/* insert code here  */}
+                    <p><strong>Description:</strong>
+                        {/* insert code here  */}
                         {gift.description}
                     </p>
                 </div>

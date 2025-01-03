@@ -72,8 +72,12 @@ function LoginPage() {
                     setIncorrect("");
                 }, 2000);
             }
-        } catch (e) {
-            return res.status(500).send('Internal server error');
+        } catch (error) {
+            console.error('Error during login:', error);
+            setIncorrect("An error occurred. Please try again.");
+            setTimeout(() => {
+                setIncorrect("");
+            }, 2000);
         }
     }
 
@@ -103,7 +107,7 @@ function LoginPage() {
                                 className="form-control"
                                 placeholder="Enter your password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {setPassword(e.target.value); setIncorrect('')}}
                             />
 
                             {/*Step 2: Task 6: Display an error message to the user.*/}
